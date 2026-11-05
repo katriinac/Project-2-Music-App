@@ -1,0 +1,36 @@
+body {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+header {
+    background-color: rgb(37, 37, 37);
+    color: rgb(197, 152, 238);
+    text-align: center;
+    padding: 25px;
+}
+header h1 {
+    margin: 0;
+}
+section {
+    background-color: rgb(37, 37, 37);
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+}
+input {
+    padding: 8px;
+    width: 800px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+button {
+    padding: 8px;
+    background-color: rgb(197, 152, 238);
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+}
