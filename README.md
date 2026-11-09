@@ -66,8 +66,9 @@ An application where you can search for an artist and it will display their albu
 
 ## Sources and acknowledgements
 
--
--
+Since Last.fm permanently restricted image access through the public API, I had to find a way to display the pictures on the website. Some Googling led me to [StackOverflow](https://stackoverflow.com/questions/55978243/last-fm-api-returns-same-white-star-image-for-all-artists)
+post where I found out about MusicBrainz. I found this link to [Javascript example](https://github.com/hugovk/now-playing-radiator/commit/e6de980db9da6846edc5aa2d2f7057b8f3b21bc8) in the comment section, that demonstarates how to use the mbid id provided by Last.fm to search for pictures using MusicBrainz. I tried using this example, with help of [MusicBrainz](https://musicbrainz.org/doc/MusicBrainz_API). I couldn't get this to work, so I turned for help of AI. I explained what I was trying to do and sent a piece of my code related to that. I used ChatGPT-5 for this. It helped me to build the working code, which I maked clearly by comments.
+- [Last.fm Api quide](https://www.last.fm/api/intro) Helped me to use the right api methods.
 -
 -
 
