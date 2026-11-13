@@ -1,4 +1,3 @@
-
 //variables for searching and displaying artists
 const input = document.querySelector("#inputArtist");
 const searchButton = document.querySelector("#searchButton");

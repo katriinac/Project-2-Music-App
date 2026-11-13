@@ -23,7 +23,7 @@ An application where you can search for an artist and it will display their most
 
 ## Web links
 
-- **Published application:** [Link to GitHub Pages]()
+- **Published application:** [Link to Netlify Pages](https://musicappbykatriina.netlify.app/)
 - **GitHub-repository:** [Link to GitHub](https://github.com/katriinac/Project-2-Music-App)
 - **Project video presentation:** [Link to the video]()
 
@@ -70,7 +70,7 @@ An application where you can search for an artist and it will display their most
 
 - What would I improve if I had more time? I would try to fix all the known issues, since some of them I think might be a simple fix. I would maybe also add some other features on the website, since now you can just search for an artist. Also I would make the site more appealing, right now it looks too basic.
 
-- What did I learn about AJAX, JSON and API? It's cool that you can use different apis to display information on your own webpage, but it seems a little bit complicated, especialle when the api returns a lot of different information.
+- What did I learn about AJAX, JSON and API? It's cool that you can use different apis to display information on your own webpage, but it seems a little bit complicated, especialle when the api returns a lot of different information. Also I learned that setting up the netlify required to change the way I call apis.
 
 - My self-assessed project grade: **7/10 points**
 
@@ -78,6 +78,7 @@ An application where you can search for an artist and it will display their most
 
 Since Last.fm permanently restricted image access through the public API, I had to find a way to display the pictures on the website. Some searching led me to [StackOverflow](https://stackoverflow.com/questions/55978243/last-fm-api-returns-same-white-star-image-for-all-artists)
 post where I found out about MusicBrainz. I found this link to [a Javascript example](https://github.com/hugovk/now-playing-radiator/commit/e6de980db9da6846edc5aa2d2f7057b8f3b21bc8) in the comment section, that demonstarates how to use the mbid id provided by Last.fm to search for pictures using MusicBrainz. I tried using this example, with help of [MusicBrainz](https://musicbrainz.org/doc/MusicBrainz_API). I couldn't get this to work, so I turned for help of AI. I explained what I was trying to do and sent a piece of my code related to that. I used ChatGPT-5 for this. It helped me to build the working code, which I maked clearly by comments.
+- Using the same AI I had to ask help with setting up the Netlify page. The code didn't work on netlify so ChatGPT guided me through what I need to change and what the myapi.mjs file should contain.
 - [Last.fm Api quide](https://www.last.fm/api/intro) Helped me to use the right api methods.
 - [Last.fm Api artist.search quide](https://www.last.fm/api/show/artist.search) Helped me to understand and use the api method for searching the artists.
 - [Last.fm Api artist.getTopAlbums quide](https://www.last.fm/api/show/artist.getTopAlbums) Helped me to understand and use the api method for searching the top albums of the the artists.
