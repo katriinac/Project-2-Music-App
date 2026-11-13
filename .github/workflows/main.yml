@@ -1,0 +1,20 @@
+name: Hae avain githubista
+
+on: [push]
+
+jobs:
+  testaus:
+    runs-on: ubuntu-latest
+
+    env:
+      MY_API_KEY: ${{ secrets.API_KEY }}
+
+    steps:
+      - name: Checkout koodi
+        uses: actions/checkout@v4
+
+      - name: Asenna riippuvuudet
+        run: npm install
+
+      - name: Aja testit avaimella
+        run: npm run test

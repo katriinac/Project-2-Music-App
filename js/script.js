@@ -1,5 +1,5 @@
 //api key
-const apiKey = "api";
+const apiKey = process.env.API_KEY;
 
 //variables for searching and displaying artists
 const input = document.querySelector("#inputArtist");
