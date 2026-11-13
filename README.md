@@ -35,7 +35,7 @@ An application where you can search for an artist and it will display their most
 
 - HTML – page structure.
 - CSS – styling and layout.
-- JavaScript – functionality, DOM scripting and AJAX.
+- JavaScript – functionality, DOM scripting, AJAX, JSON, API.
 
 ## How to use the application
 
@@ -66,7 +66,7 @@ An application where you can search for an artist and it will display their most
 
 - What did I succeed at? I got the application to work as intended and with all the requirements. After a lot of research, I managed to find a way to display the pictures. 
 
-- What was challenging? Figuring out how to display the pictures, since the feature was not available anymore using only last.fm api. I also took a long time to display all the information correctly, but managed in the end. I think this might have something to do why the application takes a long time to display the information or sometimes results in the errrors. 
+- What was challenging? Figuring out how to display the pictures, since the feature was not available anymore using only last.fm api. I also took a long time to figure out how to display all the information correctly, but managed in the end. I think this might have something to do why the application takes a long time to display the information or sometimes results in the errrors. 
 
 - What would I improve if I had more time? I would try to fix all the known issues, since some of them I think might be a simple fix. I would maybe also add some other features on the website, since now you can just search for an artist. Also I would make the site more appealing, right now it looks too basic.
 
