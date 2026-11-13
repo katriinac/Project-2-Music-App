@@ -18,13 +18,14 @@ section {
     background-color: rgb(37, 37, 37);
     margin: 20px auto;
     padding: 20px;
-    width: 80%;
+    width: 50%;
     border-radius: 10px;
 }
 input {
     padding: 8px;
     border: 1px solid black;
     border-radius: 10px;
+    width: 50%;
 }
 button {
     padding: 8px;
@@ -35,4 +36,29 @@ button {
 }
 a{
     color:rgb(223, 191, 240)
+}
+#singers{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    list-style: none;
+}
+#songList ol {
+    list-style-position: inside;
+    padding: 0;
+}
+#splitsection{
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+#splitsec{
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    text-align: center;
+}
+#artistInfo, #albums, #songSection {
+    flex: 1;
+    min-width: 0;
+     text-align: center;
 }

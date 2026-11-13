@@ -1,5 +1,5 @@
 //api key
-const apiKey = "apikey";
+const apiKey = "api";
 
 //variables for searching and displaying artists
 const input = document.querySelector("#inputArtist");
@@ -100,6 +100,7 @@ async function searchArtist() {
                 }
             }
 //Displaying the artist card
+            artistInfo.innerHTML = "";
             artistInfo.appendChild(artistCard);
         }
     }
@@ -165,7 +166,7 @@ async function getAlbum(mbid, artist) {
 //making it all vidible
         albumCard.appendChild(albumImg);
         albumCard.appendChild(albumName);
-
+        albumList.innerHTML = "";
         albumList.appendChild(albumCard);
 //calling the function to find the songs on the album
         getSongs(artist, album.name);
