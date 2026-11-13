@@ -1,5 +1,3 @@
-//api key
-const apiKey = process.env.API_KEY;
 
 //variables for searching and displaying artists
 const input = document.querySelector("#inputArtist");
@@ -18,7 +16,7 @@ async function searchArtist() {
     try{
 //fetching the info
         const response = await fetch(
-            `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${encodeURIComponent(artistName)}&api_key=${apiKey}&format=json&limit=1`
+            `/.netlify/functions/myapi?method=artist.search&artist=${encodeURIComponent(artistName)}&limit=1`
         );
         if(!response.ok){
 //Error if something goes wrong
@@ -43,7 +41,7 @@ async function searchArtist() {
 
             artistCard.appendChild(artistName);
 
-            const bioUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(artists[i].name)}&api_key=${apiKey}&format=json`;
+            const bioUrl = `/.netlify/functions/myapi?method=artist.getinfo&artist=${encodeURIComponent(artists[i].name)}`;
 
             const infoResponse = await fetch(bioUrl);
             const infoData = await infoResponse.json();
@@ -104,7 +102,7 @@ async function searchArtist() {
             artistInfo.appendChild(artistCard);
         }
     }
- //--END OF AI CODE
+//--END OF AI CODE
 
     catch(error){
         const message = `Error fetching data: ${error.message}`;
@@ -125,7 +123,7 @@ for(let i = 0; i < singerLink.length; i++){
 
 //gtting the most famous album
 async function getAlbum(mbid, artist) {
-    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=${mbid}&api_key=${apiKey}&format=json&limit=3`
+    const url = `/.netlify/functions/myapi?method=artist.gettopalbums&mbid=${encodeURIComponent(mbid)}&limit=3`;
     const albumList = document.querySelector("#albumList");
     albumList.innerHTML = "";
 //error if cant fetch
@@ -134,7 +132,7 @@ async function getAlbum(mbid, artist) {
         if(!response.ok){
             throw new Error("Can't fetch the album data");
         }
-        
+
         const data = await response.json();
         const albums = data.topalbums.album;
 
@@ -205,7 +203,7 @@ async function getAlbumCover(albumName,artistName) {
 }
 //find songs on the album
 async function getSongs(artist, albumName) {
-    const url = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=${encodeURIComponent(artist)}&album=${encodeURIComponent(albumName)}&api_key=${apiKey}&format=json`;
+    const url = `/.netlify/functions/myapi?method=album.getinfo&artist=${encodeURIComponent(artist)}&album=${encodeURIComponent(albumName)}`;
     const songList = document.querySelector("#songList");
 
     songList.textContent = "";
