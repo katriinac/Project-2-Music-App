@@ -4,7 +4,7 @@ const apiKey = "apikey";
 //variables for searching and displaying artists
 const input = document.querySelector("#inputArtist");
 const searchButton = document.querySelector("#searchButton");
-const artistInfo = document.querySelector("#artistInfo")
+const artistInfo = document.querySelector("#artistBio")
 const singerLink = document.querySelectorAll(".singerLink");
 
 //function to search for artist
@@ -18,14 +18,13 @@ async function searchArtist() {
     try{
 //fetching the info
         const response = await fetch(
-            `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${artistName}&api_key=${apiKey}&format=json&limit=1`
+            `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${encodeURIComponent(artistName)}&api_key=${apiKey}&format=json&limit=1`
         );
         if(!response.ok){
 //Error if something goes wrong
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        artistInfo.innerHTML = "";
 //save the results in variable
         const artists = data.results.artistmatches.artist;
 //empty seach returns not found
@@ -33,16 +32,18 @@ async function searchArtist() {
             artistInfo.textContent = "Not found. Try again.";
             return;
         }
+
+        await getAlbum(artists[0].mbid, artists[0].name);
 //looping through the artist to make a card for them that will display the name and a picture
         for (let i = 0; i < artists.length; i++){
 //creating the name
             const artistCard = document.createElement("div");
-            const artistName = document.createElement("h3");
+            const artistName = document.createElement("h2");
             artistName.textContent = artists[i].name;
 
             artistCard.appendChild(artistName);
 
-            const bioUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artists[i].name}&api_key=${apiKey}&format=json`;
+            const bioUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(artists[i].name)}&api_key=${apiKey}&format=json`;
 
             const infoResponse = await fetch(bioUrl);
             const infoData = await infoResponse.json();
@@ -54,7 +55,7 @@ async function searchArtist() {
             } else {
                 artistBio.textContent = "No biography available.";
             }
-
+            artistInfo.innerHTML = "";
             artistCard.appendChild(artistBio);
 
 //last.fm provides picture ids for the artist, that you can use to search for pictures using musicbrainz.
@@ -119,4 +120,118 @@ for(let i = 0; i < singerLink.length; i++){
         input.value = singerLink[i].textContent;
         searchArtist();
     });
+}
+
+//gtting the most famous album
+async function getAlbum(mbid, artist) {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=${mbid}&api_key=${apiKey}&format=json&limit=3`
+    const albumList = document.querySelector("#albumList");
+    albumList.innerHTML = "";
+//error if cant fetch
+    try {
+        const response = await fetch(url);
+        if(!response.ok){
+            throw new Error("Can't fetch the album data");
+        }
+        
+        const data = await response.json();
+        const albums = data.topalbums.album;
+
+        if(albums.length === 0){
+            albumList.textContent = "Couldn't find anything.";
+            return;
+        }
+//creating the elements for album
+        const album = albums[0];
+        const albumCard = document.createElement("div");
+        const albumName = document.createElement("h3");
+
+        albumName.textContent = album.name;
+//create the image
+        const albumImg = document.createElement("img");
+        albumImg.alt = album.name;
+//find the image
+        const imgUrl = await getAlbumCover(album.name, artist);
+        if(imgUrl !== ""){
+            albumImg.src = imgUrl;
+        }
+        else{
+            albumImg.src = "https://placehold.co/200x200?text=No+Cover";
+        }
+//if cant find the image, we use a placeholder image
+        albumImg.onerror = function() {
+            albumImg.src = "https://placehold.co/200x200?text=No+Cover";
+        };
+//making it all vidible
+        albumCard.appendChild(albumImg);
+        albumCard.appendChild(albumName);
+
+        albumList.appendChild(albumCard);
+//calling the function to find the songs on the album
+        getSongs(artist, album.name);
+
+    }
+    catch (error){
+         console.log("Album error:", error.message);
+        albumList.textContent = "Couldn't load any albums";
+    }
+}
+//function to get the album cover
+async function getAlbumCover(albumName,artistName) {
+    const search = 'releasegroup:"' + albumName + '" AND artist:"' + artistName + '"';
+    const url = 'https://musicbrainz.org/ws/2/release-group/?query=' + encodeURIComponent(search) + '&fmt=json&limit=1';
+//error if cant find
+    try{
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error("Couldn't find albums");
+        }
+
+        const data = await response.json();
+        const albums = data["release-groups"];
+        if(albums.length === 0){
+            return "";
+        }
+        const albumId = albums[0].id;
+
+        const coverUrl = 'https://coverartarchive.org/release-group/' + albumId + '/front-250';
+        return coverUrl;
+    } 
+    catch(error){
+        return "";
+    }
+}
+//find songs on the album
+async function getSongs(artist, albumName) {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=${encodeURIComponent(artist)}&album=${encodeURIComponent(albumName)}&api_key=${apiKey}&format=json`;
+    const songList = document.querySelector("#songList");
+
+    songList.textContent = "";
+//error if cant find
+    try{
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error("Couldn't find any songs");
+        }
+
+        const data = await response.json();
+//creating the elements and looping to display every song
+        songList.innerHTML = "";
+        const tracks = data.album.tracks.track;
+        const trackList = document.createElement("ol");
+        for(let i = 0; i < tracks.length; i++){
+
+            const track = document.createElement("li");
+            track.textContent = tracks[i].name;
+
+            trackList.appendChild(track);
+        }
+//displaying the whole list on the page
+        songList.appendChild(trackList);
+    }
+    catch(error){
+        songList.textContent = "Couldn't find any songs";
+    }
 }
