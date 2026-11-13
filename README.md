@@ -50,7 +50,7 @@ An application where you can search for an artist and it will display their most
 
 ## Screenshots
 
-![Screenshot of the application](img/)
+![Screenshot of the application](img/working.png)
 
 ## Known issues / limitations
 
