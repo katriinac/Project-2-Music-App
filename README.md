@@ -87,3 +87,4 @@ post where I found out about MusicBrainz. I found this link to [a Javascript exa
 - I also used the Workshop7 and 8 assignments I had completed earlier to help with creating the code. (https://github.com/katriinac/web-development-1)
 
   ## License
+This project is licensed under the MIT License.
