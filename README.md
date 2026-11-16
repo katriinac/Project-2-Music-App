@@ -25,7 +25,7 @@ An application where you can search for an artist and it will display their most
 
 - **Published application:** [Link to Netlify Pages](https://musicappbykatriina.netlify.app/)
 - **GitHub-repository:** [Link to GitHub](https://github.com/katriinac/Project-2-Music-App)
-- **Project video presentation:** [Link to the video]()
+- **Project video presentation:** [Link to the video](https://youtu.be/cO__FHNBkZQ)
 
 ## About the application
 
